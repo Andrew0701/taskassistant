@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.example.andrew.taskassistant"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def libraries = rootProject.ext.libraries
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "com.android.support:appcompat-v7:${libraries.supportLibraryVersion}"
+    implementation "com.android.support:support-v4:${libraries.supportLibraryVersion}"
+    implementation "com.android.support:design:${libraries.supportLibraryVersion}"
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    implementation "com.android.support:recyclerview-v7:${libraries.supportLibraryVersion}"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxandroid:${libraries.rxAndroidVersion}"
+    implementation "io.reactivex.rxjava2:rxjava:${libraries.rxJavaVersion}"
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:${libraries.roomVersion}"
+    kapt "android.arch.persistence.room:compiler:${libraries.roomVersion}"
+
+    //Test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${libraries.daggerVersion}"
+    implementation "com.google.dagger:dagger-android-support:${libraries.daggerVersion}" // if you use the support libraries
+    kapt "com.google.dagger:dagger-android-processor:${libraries.daggerVersion}"
+    kapt "com.google.dagger:dagger-compiler:${libraries.daggerVersion}"
+
+    // Logs
+    implementation "com.jakewharton.timber:timber:${libraries.timberVersion}"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${libraries.glideVersion}"
+}
