@@ -3,5 +3,6 @@
 
     <string name="name">Name</string>
     <string name="description">Description</string>
+    <string name="add_task">Add task</string>
 
 </resources>
