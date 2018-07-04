@@ -16,7 +16,7 @@ class MainActivity : BaseActivity() {
         initViews()
     }
 
-    fun initViews() {
+    private fun initViews() {
         btnAddTask.setOnClickListener { openAddTaskActivity() }
     }
 

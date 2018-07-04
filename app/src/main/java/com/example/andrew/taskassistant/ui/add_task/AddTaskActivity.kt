@@ -14,7 +14,7 @@ class AddTaskActivity : BaseActivity() {
         initViews()
     }
 
-    fun initViews() {
+    private fun initViews() {
         fabAddTask.setOnClickListener {  }
     }
 }
