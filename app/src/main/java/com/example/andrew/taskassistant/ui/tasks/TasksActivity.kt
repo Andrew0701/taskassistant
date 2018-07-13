@@ -1,23 +1,23 @@
-package com.example.andrew.taskassistant.ui
+package com.example.andrew.taskassistant.ui.tasks
 
 import android.content.Intent
 import android.os.Bundle
 import com.example.andrew.taskassistant.R
 import com.example.andrew.taskassistant.ui.add_task.AddTaskActivity
 import com.example.andrew.taskassistant.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_tasks.*
 
-class MainActivity : BaseActivity() {
+class TasksActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_tasks)
 
         initViews()
     }
 
     private fun initViews() {
-        btnAddTask.setOnClickListener { openAddTaskActivity() }
+        fabAddTask.setOnClickListener { openAddTaskActivity() }
     }
 
     private fun openAddTaskActivity() {
