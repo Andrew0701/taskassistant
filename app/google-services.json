@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "124896692885",
+    "firebase_url": "https://task-assistant-d8b02.firebaseio.com",
+    "project_id": "task-assistant-d8b02",
+    "storage_bucket": "task-assistant-d8b02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124896692885:android:e361d216f3cb093d",
+        "android_client_info": {
+          "package_name": "com.example.andrew.taskassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124896692885-pkqopcvq5si4umacvhged07a946ev9tn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.andrew.taskassistant",
+            "certificate_hash": "4e185324d461ae4527297e5d3c002ccd463005e7"
+          }
+        },
+        {
+          "client_id": "124896692885-0fakk7m1kgau4tpn0rtnvjkkc1t42gjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKSkYn4iiZpuVBeYSBzrFNHo3OU9j15WY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124896692885-0fakk7m1kgau4tpn0rtnvjkkc1t42gjm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

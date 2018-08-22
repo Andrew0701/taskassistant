@@ -58,4 +58,10 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:glide:${libraries.glideVersion}"
+
+    //Firebase auth
+    implementation "com.google.firebase:firebase-auth:${libraries.firebaseVersion}"
+    implementation "com.google.android.gms:play-services-auth:${libraries.googlePlayServicesVersion}"
+    implementation 'com.firebaseui:firebase-ui-auth:4.0.0'
+
 }

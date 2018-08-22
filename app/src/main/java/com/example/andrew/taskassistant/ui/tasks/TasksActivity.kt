@@ -12,11 +12,9 @@ class TasksActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks)
-
-        initViews()
     }
 
-    private fun initViews() {
+    override fun initViews() {
         fabAddTask.setOnClickListener { openAddTaskActivity() }
     }
 
