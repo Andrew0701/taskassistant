@@ -4,5 +4,8 @@
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="add_task">Add task</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
 
 </resources>

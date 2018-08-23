@@ -1,16 +1,19 @@
 package com.example.andrew.taskassistant.ui.sign_in
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.example.andrew.taskassistant.R
 import com.example.andrew.taskassistant.ui.base.BaseActivity
+import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import timber.log.Timber
 
 class SignInActivity : BaseActivity() {
 
@@ -26,7 +29,8 @@ class SignInActivity : BaseActivity() {
 
         configureSignInClient()
 
-        btn_sign_in.setOnClickListener { signIn() }
+        btn_sign_in.setOnClickListener { signOut() }
+        btn_google_sign_in.setOnClickListener { signIn() }
 
         checkUserLogin()
     }
@@ -34,24 +38,25 @@ class SignInActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == SIGN_IN_CODE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == SIGN_IN_CODE) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
+            val account = task?.getResult(ApiException::class.java)
+
+            handleSignInResult(account)
         }
     }
 
-    private fun handleSignInResult(task: Task<GoogleSignInAccount>?) {
-        val account = task?.getResult(ApiException::class.java)
-
+    private fun handleSignInResult(account: GoogleSignInAccount?) {
         if (account == null) {
             showMessage("Some error")
         } else {
-            showMessage(account.displayName)
+            showMessage(account.displayName + "\n" + account.email)
         }
     }
 
     private fun showMessage(message: String?) {
-        tv_text.text = message
+        Timber.v(message)
+        Log.e("TAG", message)
     }
 
     override fun initViews() {
@@ -61,6 +66,7 @@ class SignInActivity : BaseActivity() {
 
     private fun configureSignInClient() {
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
                 .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
@@ -71,21 +77,16 @@ class SignInActivity : BaseActivity() {
         startActivityForResult(singInIntent, SIGN_IN_CODE)
     }
 
+    private fun signOut() {
+//        FirebaseAuth.getInstance().signOut()
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener { checkUserLogin() }
+    }
+
     private fun checkUserLogin() {
         val account = GoogleSignIn.getLastSignedInAccount(this)
 
-        if (account == null) {
-            showLogInScreen()
-        } else {
-            showMainScreen()
-        }
-    }
-
-    private fun showMainScreen() {
-        tv_text.text = "You are already logged in"
-    }
-
-    private fun showLogInScreen() {
-
+        handleSignInResult(account)
     }
 }
