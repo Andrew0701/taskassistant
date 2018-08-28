@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -21,49 +22,82 @@ android {
     }
 }
 
-dependencies {
-    def libraries = rootProject.ext.libraries
+ext {
+    support_lib_version = '1.0.0-beta01'
+    constraint_version = '2.0.0-alpha2'
+    arch_components_version = '2.0.0-beta01'
+    nav_version = '1.0.0-alpha02'
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    junit_version = '4.12'
+    test_runner_version = '1.1.0-alpha3'
 
-    implementation "com.android.support:appcompat-v7:${libraries.supportLibraryVersion}"
-    implementation "com.android.support:support-v4:${libraries.supportLibraryVersion}"
-    implementation "com.android.support:design:${libraries.supportLibraryVersion}"
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
-    implementation "com.android.support:recyclerview-v7:${libraries.supportLibraryVersion}"
+    retrofit_version = '2.4.0'
+    okHttp_version = '3.10.0'
 
-    // RxJava
-    implementation "io.reactivex.rxjava2:rxandroid:${libraries.rxAndroidVersion}"
-    implementation "io.reactivex.rxjava2:rxjava:${libraries.rxJavaVersion}"
+    rx_kotlin_version = '2.2.0'
+    rx_java_version = '2.1.16'
+    rx_android_version = '2.0.2'
 
-    // Room
-    implementation "android.arch.persistence.room:runtime:${libraries.roomVersion}"
-    kapt "android.arch.persistence.room:compiler:${libraries.roomVersion}"
+    timber_version = '4.7.1'
 
-    //Test
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+    dagger_version = '2.16'
 
-    // Dagger
-    implementation "com.google.dagger:dagger:${libraries.daggerVersion}"
-    implementation "com.google.dagger:dagger-android-support:${libraries.daggerVersion}" // if you use the support libraries
-    kapt "com.google.dagger:dagger-android-processor:${libraries.daggerVersion}"
-    kapt "com.google.dagger:dagger-compiler:${libraries.daggerVersion}"
+    glide_version = '4.8.0'
 
-    // Logs
-    implementation "com.jakewharton.timber:timber:${libraries.timberVersion}"
-
-    // Glide
-    implementation "com.github.bumptech.glide:glide:${libraries.glideVersion}"
-
-    //Firebase auth
-    implementation "com.google.firebase:firebase-auth:${libraries.firebaseVersion}"
-    implementation "com.google.android.gms:play-services-auth:${libraries.googlePlayServicesVersion}"
-    implementation 'com.firebaseui:firebase-ui-auth:4.0.0'
-
+    firebase_version = '16.0.3'
+    firebase_ui_version = '4.1.0'
 }
 
-apply plugin: 'com.google.gms.google-services'
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation"org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    implementation "androidx.appcompat:appcompat:$support_lib_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
+
+    // Jetpack
+    implementation "androidx.lifecycle:lifecycle-extensions:$arch_components_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$arch_components_version"
+    implementation "android.arch.navigation:navigation-fragment:$nav_version"
+    implementation "android.arch.navigation:navigation-ui:$nav_version"
+    implementation "androidx.room:room-runtime:$arch_components_version"
+    implementation "androidx.room:room-rxjava2:$arch_components_version"
+    kapt "androidx.room:room-compiler:$arch_components_version"
+
+    // Testing
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test:runner:$test_runner_version"
+
+    // Timber
+    api "com.jakewharton.timber:timber:$timber_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$okHttp_version"
+
+    // Rx
+    implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    //Firebase auth
+    implementation "com.google.firebase:firebase-core:$firebase_version"
+    implementation "com.google.firebase:firebase-auth:$firebase_version"
+    implementation "com.firebaseui:firebase-ui-auth:$firebase_ui_version"
+    implementation "com.google.android.gms:play-services-auth:$google_play_services_version"
+
+}
